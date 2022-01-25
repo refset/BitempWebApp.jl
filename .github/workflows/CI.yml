@@ -36,8 +36,5 @@ jobs:
         with:
           version: '1.7.1'
       - run: 
-          julia -e '
-            push!(LOAD_PATH,"src")
-            using Genie
-            include("test/runtests.jl")'
+          julia -e 'push!(LOAD_PATH,"src"); using Genie; include("test/runtests.jl")'
         shell: bash 
