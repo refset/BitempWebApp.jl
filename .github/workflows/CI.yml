@@ -35,10 +35,5 @@ jobs:
         uses: julia-actions/setup-julia@v1
         with:
           version: '1.7.1'
-      - run: GENIE_ENV="test" julia -e ''' 
-              push!(LOAD_PATH,"src") \
-              using Genie \
-              include("test/runtests.jl") \
-            '''
-
+      - run: GENIE_ENV="test" julia test/runtests.jl
         shell: bash 
