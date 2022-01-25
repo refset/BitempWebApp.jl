@@ -11,5 +11,5 @@ makedocs(
 # See "Hosting Documentation" and deploydocs() in the Documenter manual
 # for more information.
 deploydocs(
-    repo = "repo = "https://github.com/Kaeptenblaubaer/BitempWebApp.jl""
+    repo = "repo = "https://github.com/Kaeptenblaubaer/BitempWebApp.jl"
 )
