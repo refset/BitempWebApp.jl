@@ -35,8 +35,8 @@ jobs:
       - run: |
           julia --project=docs -e '
             using Documenter: doctest
-            using BitemporalPostgres
-            doctest(BitemporalPostgres)'
+            using BitempWebApp
+            doctest(BitempWebApp)'
       - run: julia --project=docs docs/make.jl
         env:
           JULIA_PKG_SERVER: ""
