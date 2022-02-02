@@ -22,7 +22,7 @@ ContractRevision
   a revision of a Contract component of a bitemporal entity
 
 """
-@kwdef mutable struct ContractRevision <: BitemporalPostgres.Component_Revision
+@kwdef mutable struct ContractRevision <: BitemporalPostgres.ComponentRevision
   id::DbId = DbId()
   ref_component :: DbId = infinityKey   
   ref_validfrom::DbId = infinityKey 

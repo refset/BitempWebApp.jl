@@ -21,7 +21,7 @@ Partner_Revision
   a revision of a Partner component of a bitemporal entity
 
 """
-@kwdef mutable struct PartnerRevision <: BitemporalPostgres.Component_Revision
+@kwdef mutable struct PartnerRevision <: BitemporalPostgres.ComponentRevision
   id::DbId = DbId()
   ref_component :: DbId = infinityKey   
   ref_validfrom::DbId = infinityKey 
