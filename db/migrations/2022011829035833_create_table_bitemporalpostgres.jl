@@ -1,4 +1,0 @@
-module CreateTableBitemporalPostgres
-import BitemporalPostgres
-using BitemporalPostgres
-end

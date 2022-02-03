@@ -10,6 +10,7 @@ export up, down
 
 function up()
 
+  BitemporalPostgres.DDL.up()
   create_table(:contracts) do
       [
         column(:id,:bigserial,"PRIMARY KEY")
@@ -75,6 +76,7 @@ function up()
 end 
 
 function down()
+    BitemporalPostgres.DDL.down()
     drop_table(:contractRevisions)
     drop_table(:contracts)
     drop_table(:partnerRevisions)
