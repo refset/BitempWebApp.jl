@@ -1,6 +1,7 @@
 ![beware - work in progress](docs/src/assets/wip.png)
 [![CI](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/CI.yml/badge.svg)](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/CI.yml)
 
+[![Documentation](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/Documentation.yml/badge.svg)](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/Documentation.yml)
 
 This is meant to become a prototype of a bitemporal data management system for life insurance
 
