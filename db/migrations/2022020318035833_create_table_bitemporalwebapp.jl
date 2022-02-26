@@ -1,5 +1,4 @@
 module CreateTableBitempWebApp
-import BitemporalPostgres
 import SearchLight: AbstractModel, DbId, query, save!
 import SearchLight.Migrations: create_table, column, columns, primary_key, add_index, drop_table, add_indices
 import SearchLightPostgreSQL
@@ -10,11 +9,11 @@ export up, down
 
 function up()
 
-  BitemporalPostgres.DDL.up()
   create_table(:contracts) do
       [
         column(:id,:bigserial,"PRIMARY KEY")
         column(:ref_history, :integer,"REFERENCES histories(id) ON DELETE CASCADE")
+        column(:ref_version, :integer,"REFERENCES versions(id) ON DELETE CASCADE")
       ]
     end
   
@@ -44,6 +43,7 @@ function up()
   [
     column(:id,:bigserial,"PRIMARY KEY")
     column(:ref_history, :integer,"REFERENCES histories(id) ON DELETE CASCADE")
+    column(:ref_version, :integer,"REFERENCES versions(id) ON DELETE CASCADE")
   ]
   end
 
@@ -68,17 +68,53 @@ function up()
   ALTER TABLE partnerRevisions 
   ADD CONSTRAINT partnersversionrange EXCLUDE USING GIST (ref_component WITH =, ref_valid WITH &&)
   """
-    
+
+  create_table(:contractPartnerRefs) do
+    [
+      column(:id,:bigserial,"PRIMARY KEY")
+      column(:ref_history, :integer,"REFERENCES histories(id) ON DELETE CASCADE")
+      column(:ref_version, :integer,"REFERENCES versions(id) ON DELETE CASCADE")
+      column(:ref_super, :integer,"REFERENCES contracts(id) ON DELETE CASCADE")
+    ]
+  end
+
+create_table(:contractPartnerRefRevisions) do
+[
+  column(:id,:bigserial,"PRIMARY KEY")
+  column(:ref_component, :integer, "REFERENCES contracts(id) ON DELETE CASCADE")
+  column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+  column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+  column(:ref_valid, :int8range)
+  column(:description, :string)
+  column(:ref_partner, :integer,"REFERENCES partners(id) ON DELETE CASCADE")
+]
+end
+
+createContractPartnerRefRevisionsTrigger = """
+CREATE TRIGGER cprr_versions_trig
+BEFORE INSERT OR UPDATE ON contractPartnerRefRevisions
+FOR EACH ROW EXECUTE PROCEDURE f_versionrange();
+"""
+
+createContractPartnerRefRevisionsConstraints = """
+ALTER TABLE contractPartnerRefRevisions 
+ADD CONSTRAINT contractpartnerrefbsversionrange EXCLUDE USING GIST (ref_component WITH =, ref_valid WITH &&)
+"""    
+
   SearchLight.query(createContractRevisionsTrigger)
   SearchLight.query(createContractRevisionsConstraints)
   SearchLight.query(createPartnerRevisionsTrigger)
   SearchLight.query(createPartnerRevisionsConstraints)
+  SearchLight.query(createContractPartnerRefRevisionsTrigger)
+  SearchLight.query(createContractPartnerRefRevisionsConstraints)
 end 
 
 function down()
     BitemporalPostgres.DDL.down()
     drop_table(:contractRevisions)
     drop_table(:contracts)
+    drop_table(:contractPartnerRefRevisions)
+    drop_table(:contractPartnerRefs)
     drop_table(:partnerRevisions)
     drop_table(:partners)
 end 

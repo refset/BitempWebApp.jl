@@ -12,7 +12,8 @@ Partner
 """
 @kwdef mutable struct Partner <: BitemporalPostgres.Component
   id::DbId = DbId()
-  ref_history :: DbId = infinityKey  
+  ref_history :: DbId = InfinityKey  
+  ref_version :: DbId = InfinityKey  
 end
 
 """
@@ -23,9 +24,9 @@ Partner_Revision
 """
 @kwdef mutable struct PartnerRevision <: BitemporalPostgres.ComponentRevision
   id::DbId = DbId()
-  ref_component :: DbId = infinityKey   
-  ref_validfrom::DbId = infinityKey 
-  ref_invalidfrom::DbId = infinityKey 
+  ref_component :: DbId = InfinityKey   
+  ref_validfrom::DbId = InfinityKey 
+  ref_invalidfrom::DbId = InfinityKey 
   description::String = ""
 end
 

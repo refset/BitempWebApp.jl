@@ -1,46 +1,27 @@
-module InsuranceContractsController
-import BitemporalPostgres
-include("InsurancePartner.jl")
-
-    function createPartner()
-        p = Partner()
-        p
-    end
-
-end
-
-
-
-
-module BitemporalPartner
-import BitemporalPostgres
-import SearchLight: DbId
-import Base: @kwdef
-export Partner, Partner_Revision
+ENV["GENIE_ENV"]="dev"
+push!(LOAD_PATH,"app/resources/insurancecontracts")
+push!(LOAD_PATH,"app/resources/insurancepartners")
+using Pkg
+Pkg.add(url="https://github.com/michaelfliegner/BitemporalPostgres.jl")
+import InsuranceContractsController
+using InsuranceContractsController
+import InsurancePartnersController
+using InsurancePartnersController
 using BitemporalPostgres
-"""
-Partner
+using SearchLight
+SearchLight.Configuration.load() |> SearchLight.connect
 
-  a component of a bitemporal entity
-
-"""
-@kwdef mutable struct Partner <: Component
-  id::DbId = DbId()
-  ref_history :: DbId = infinityKey  
-end
-
-"""
-Partner_Revision
-
-  a revision of a Partner component of a bitemporal entity
-
-"""
-@kwdef mutable struct Partner_Revision <: Component_Revision
-  id::DbId = DbId()
-  ref_component :: DbId = infinityKey   
-  ref_validfrom::DbId = infinityKey 
-  ref_invalidfrom::DbId = infinityKey 
-  description::String = ""
-end
-
-end
+p=Partner()
+pr=PartnerRevision(description="blue")
+w=Workflow()
+create_entity!(w)
+create_component!(p,pr,w)
+c=Contract()
+cr=ContractRevision(description="blue")
+cpr=ContractPartnerRef(ref_super=c.id)
+cprr=ContractPartnerRefRevision(ref_partner=p.id,description="blue")
+w=Workflow()
+create_entity!(w)
+create_component!(c,cr,w)
+create_subcomponent!(c,cpr,cprr,w)
+commit_workflow!(w)

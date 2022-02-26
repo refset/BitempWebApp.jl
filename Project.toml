@@ -1,8 +1,8 @@
 [deps]
-BitemporalPostgres = "2a9be1c0-7381-49b7-b3af-02263377a52d"
+BitemporalPostgres = "e513cd14-23e6-48df-acf1-d9bc8fa5674b"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
-Genie = "c43c736e-a2d1-11e8-161f-af95117fbd1e"
 Intervals = "d8418881-c3e1-53bb-8760-2df7ec849ed5"
+Pluto = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 SearchLight = "340e8cb6-72eb-11e8-37ce-c97ebeb32050"
 SearchLightPostgreSQL = "4327cdd6-4902-11ea-0272-430cea0431bd"
