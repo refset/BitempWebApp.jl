@@ -26,7 +26,18 @@ jobs:
           git config --global user.name name
           git config --global user.email email
           git config --global github.user username
-      - run: julia --project=. docs/make.jl
+      - run: |
+          julia --project=docs -e '
+            using Pkg
+            Pkg.develop(PackageSpec(path=pwd()))
+            Pkg.instantiate()
+            Pkg.add("Documenter")'
+      - run: |
+          julia --project=docs -e '
+            using Documenter: doctest
+            using BitemporalPostgres
+            doctest(BitemporalPostgres)'
+      - run: julia --project=docs docs/make.jl
         env:
           JULIA_PKG_SERVER: ""
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

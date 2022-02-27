@@ -1,6 +1,5 @@
 using BitempWebApp, Test
 # implement your tests here
-ENV["GENIE_ENV"]="dev"
 push!(LOAD_PATH,"app/resources/insurancecontracts")
 push!(LOAD_PATH,"app/resources/insurancepartners")
 using Pkg
