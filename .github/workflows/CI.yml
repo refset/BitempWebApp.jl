@@ -36,5 +36,5 @@ jobs:
         with:
           version: '1.7.1'
       - run: 
-          julia -e 'push!(LOAD_PATH,"src"); import Pkg; Pkg.add("Genie"); using Genie; Pkg.add("LoggingExtras"); include("test/runtests.jl")'
+          GENIE_ENV="test" julia -e 'push!(LOAD_PATH,"src"); import Pkg; Pkg.add("Genie"); using Genie; Pkg.add("LoggingExtras"); include("test/runtests.jl")'
         shell: bash 

@@ -17,4 +17,4 @@ run(```psql -f sqlsnippets/droptables.sql```)
 SearchLight.Configuration.load() |> SearchLight.connect
 SearchLight.Migrations.create_migrations_table()
 BitemporalPostgres.up()
-SearchLight.Migrations.up()
+include("db/migrations/2022020318035833_create_table_bitemporalwebapp.jl")

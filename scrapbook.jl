@@ -9,6 +9,8 @@ import InsurancePartnersController
 using InsurancePartnersController
 using BitemporalPostgres
 using SearchLight
+using ToStruct
+using JSON
 SearchLight.Configuration.load() |> SearchLight.connect
 
 p=Partner()
@@ -27,3 +29,7 @@ create_entity!(w)
 create_component!(c,cr,w)
 create_subcomponent!(c,cpr,cprr,w)
 commit_workflow!(w)
+
+j=JSON.json(c)
+d=JSON.parse(j)
+ToStruct.tostruct(Contract,d)
