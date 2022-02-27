@@ -1,10 +1,15 @@
+push!(LOAD_PATH,"./src")
+push!(LOAD_PATH,"./app/resources/insurancecontracts")
+push!(LOAD_PATH,"./app/resources/insurancepartners")
 using Documenter
 using BitempWebApp
+using InsuranceContractsController
+using InsurancePartnersController
 
 makedocs(
     sitename = "BitempWebApp",
     format = Documenter.HTML(),
-    modules = [BitempWebApp]
+    modules = [BitempWebApp,InsuranceContractsController,InsurancePartnersController]
 )
 
 # Documenter can also automatically deploy documentation to gh-pages.
