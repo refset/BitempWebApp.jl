@@ -13,7 +13,7 @@ using SearchLight
 using SearchLightPostgreSQL
 using BitemporalPostgres
 using TimeZones
-
+run(```psql -f sqlsnippets/droptables.sql```)
 SearchLight.Configuration.load() |> SearchLight.connect
 SearchLight.Migrations.create_migrations_table()
 BitemporalPostgres.up()
