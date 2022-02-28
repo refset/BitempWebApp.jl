@@ -1,2 +1,5 @@
 [deps]
+BitempWebApp = "ddb264ba-16ba-4078-b191-0b8ffc9987d7"
+BitemporalPostgres = "e513cd14-23e6-48df-acf1-d9bc8fa5674b"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Genie = "c43c736e-a2d1-11e8-161f-af95117fbd1e"
