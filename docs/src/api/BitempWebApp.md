@@ -1,5 +1,5 @@
 # BitempWebApp.jl
 
 ```@autodocs
-Modules = [BitempWebApp, InsuranceContracsController, InsurancePartnersController]
+Modules = [BitempWebApp]
 ```
