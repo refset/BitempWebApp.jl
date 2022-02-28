@@ -35,7 +35,7 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[deps.BitempWebApp]]
-deps = ["BitemporalPostgres", "Dates", "Genie", "Intervals", "Logging", "LoggingExtras", "Revise", "SearchLight", "SearchLightPostgreSQL", "TimeZones", "ToStruct"]
+deps = ["BitemporalPostgres", "Dates", "Documenter", "Genie", "Intervals", "Logging", "LoggingExtras", "Revise", "SearchLight", "SearchLightPostgreSQL", "TimeZones", "ToStruct"]
 path = "/workspace/BitempWebApp.jl"
 uuid = "ddb264ba-16ba-4078-b191-0b8ffc9987d7"
 version = "0.1.0"
