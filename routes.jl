@@ -10,8 +10,8 @@ end
 
 route("/jsonpayload", method = POST) do
   if haskey(jsonpayload(),"command")
-    if jsonpayload()["command"]=="csection"
-      json(InsuranceContractsController.ContractSection())
+    if jsonpayload()["command"]=="createContract"
+      json(InsuranceContractsController.createContract())
     else
       json(Dict{String, Any}("error" => "only csection recognizable"))
     end
@@ -20,4 +20,4 @@ route("/jsonpayload", method = POST) do
   end
 end
 
-up()
+Genie.up()
