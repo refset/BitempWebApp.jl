@@ -1,62 +1,45 @@
 module InsuranceContractsController
-import BitemporalPostgres
-import SearchLight: DbId
 import Base: @kwdef
-export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision
+import TimeZones
+using TimeZones
+import ToStruct
+using ToStruct
+import JSON
+using JSON
+import SearchLight
+using SearchLight
+import BitemporalPostgres
 using BitemporalPostgres
+include("InsuranceContracts.jl")
+using .InsuranceContracts
+export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision
+include("InsurancePartners.jl")
+using ..InsurancePartners
+export Partner, PartnerRevision
+export ContractSection, PartnerSection,csection
 
-"""
-Contract
-
-  a component of a bitemporal entity
-
-"""
-@kwdef mutable struct Contract <: BitemporalPostgres.Component
-  id::DbId = DbId()
-  ref_history :: DbId = InfinityKey  
-  ref_version :: DbId = InfinityKey  
+@kwdef mutable struct PartnerSection
+    tsdb_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
+    tsw_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
+    ref_history::SearchLight.DbId = DbId(InfinityKey)
+    ref_version::SearchLight.DbId = MaxVersion
+    partner_revision::PartnerRevision = PartnerRevision()
 end
 
-"""
-ContractRevision
-
-  a revision of a Contract component of a bitemporal entity
-
-"""
-@kwdef mutable struct ContractRevision <: BitemporalPostgres.ComponentRevision
-  id::DbId = DbId()
-  ref_component :: DbId = InfinityKey   
-  ref_validfrom::DbId = InfinityKey 
-  ref_invalidfrom::DbId = InfinityKey 
-  description::String = ""
+@kwdef mutable struct ContractSection
+    tsdb_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
+    tsw_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
+    ref_history::SearchLight.DbId = DbId(InfinityKey)
+    ref_version::SearchLight.DbId = MaxVersion
+    contract_revision::ContractRevision = ContractRevision()
+    contractpartnerref_revision::ContractPartnerRefRevision = ContractPartnerRefRevision()
+    ref_entities::Dict{DbId,Union{PartnerSection,ContractSection}} = Dict{DbId,Union{PartnerSection,ContractSection}}()
 end
 
-"""
-ContractPartnerRef
 
-  a component of a bitemporal entity
-
-"""
-@kwdef mutable struct ContractPartnerRef <: BitemporalPostgres.SubComponent
-  id::DbId = DbId()
-  ref_history :: DbId = InfinityKey  
-  ref_version :: DbId = InfinityKey 
-  ref_super :: DbId = InfinityKey  
+function csection()
+    psection = PartnerSection()
+    CntractSection(ref_entities = (Dict(DbId(1) => psection)))
 end
 
-"""
-ContractPartnerRefRevision
-
-  a revision of a Contract component of a bitemporal entity
-
-"""
-@kwdef mutable struct ContractPartnerRefRevision <: BitemporalPostgres.ComponentRevision
-  id::DbId = DbId()
-  ref_component :: DbId = InfinityKey   
-  ref_validfrom::DbId = InfinityKey 
-  ref_invalidfrom::DbId = InfinityKey 
-  description::String = ""
-  ref_partner::DbId = InfinityKey 
-end
-
-end
+end #module

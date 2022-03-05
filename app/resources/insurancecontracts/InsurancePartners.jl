@@ -1,4 +1,4 @@
-module InsurancePartnersController
+module InsurancePartners
 import BitemporalPostgres
 import SearchLight: DbId
 import Base: @kwdef
