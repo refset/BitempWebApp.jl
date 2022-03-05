@@ -1,3 +1,4 @@
+
 push!(LOAD_PATH,"app/resources/insurancecontracts")
 import InsuranceContractsController
 using Genie, Genie.Router, Genie.Requests, Genie.Renderer.Json
@@ -15,7 +16,7 @@ route("/jsonpayload", method = POST) do
       json(Dict{String, Any}("error" => "only csection recognizable"))
     end
   else
-    json(Dict{String, Any}("error" => "no command"))
+    json(jsonpayload())
   end
 end
 
