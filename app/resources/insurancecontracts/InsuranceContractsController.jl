@@ -1,4 +1,6 @@
 module InsuranceContractsController
+using Genie.Renderer.Html
+
 import Base: @kwdef
 import TimeZones
 using TimeZones
@@ -14,9 +16,10 @@ include("InsuranceContracts.jl")
 using .InsuranceContracts
 export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision
 include("InsurancePartners.jl")
-using ..InsurancePartners
+using .InsurancePartners
 export Partner, PartnerRevision
 export ContractSection, PartnerSection,csection
+export insurancecontracts_view
 
 @kwdef mutable struct PartnerSection
     tsdb_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
@@ -62,5 +65,9 @@ function createContract()
     create_subcomponent!(c,cpr,cprr,w)
     ContractSection(ref_version=w.ref_version, contract_revision=cr, contractpartnerref_revision= cprr, ref_entities = (Dict(p.id => psection)))
 end
+
+function insurancecontracts_view()
+    html(:insurancecontracts, :insurancecontracts, contracts = all(ContractRevision))
+  end
 
 end #module

@@ -8,16 +8,18 @@ route("/") do
   serve_static_file("welcome.html")
 end
 
-route("/jsonpayload", method = POST) do
-  if haskey(jsonpayload(),"command")
-    if jsonpayload()["command"]=="createContract"
-      json(InsuranceContractsController.createContract())
-    else
-      json(Dict{String, Any}("error" => "only csection recognizable"))
-    end
-  else
-    json(jsonpayload())
-  end
-end
+route("/contracts", InsuranceContractsController.insurancecontracts_view)
+
+# route("/jsonpayload", method = POST) do
+#   if haskey(jsonpayload(),"command")
+#     if jsonpayload()["command"]=="createContract"
+#       json(InsuranceContractsController.createContract())
+#     else
+#       json(Dict{String, Any}("error" => "only csection recognizable"))
+#     end
+#   else
+#     json(jsonpayload())
+#   end
+# end
 
 Genie.up()

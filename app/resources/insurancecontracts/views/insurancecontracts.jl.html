@@ -1,0 +1,7 @@
+<!-- billgatesbooks.jl.html -->
+<h1>Bill Gates' top $(length(contracts)) recommended books</h1>
+<ul>
+  <% for_each(contracts) do contract %>
+    <li>$(contract.description) by $(contract.id)</li>
+  <% end %>
+</ul>

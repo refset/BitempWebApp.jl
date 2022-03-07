@@ -1,21 +1,21 @@
 ENV["GENIE_ENV"]="dev"
 push!(LOAD_PATH,"app/resources/insurancecontracts")
-push!(LOAD_PATH,"app/resources/insurancepartners")
 using Pkg
 Pkg.add("Revise")
 using Revise
 import Base: @kwdef
 Pkg.add("BitemporalPostgres")
+Pkg.add("HTTP")
 Pkg.add("JSON")
 import InsuranceContractsController
 using InsuranceContractsController.InsuranceContracts
-import InsurancePartnersController
-using InsurancePartnersController.InsurancePartners
+using InsuranceContractsController.InsurancePartners
 using BitemporalPostgres
 using SearchLight
 using TimeZones
 using ToStruct
 using JSON
+using HTTP
 SearchLight.Configuration.load() |> SearchLight.connect
 p=Partner()
 pr=PartnerRevision(description="blue")
@@ -60,7 +60,7 @@ end
 
 psection=PartnerSection()
 csection=ContractSection(ref_entities=(Dict(DbId(1)=>psection)))
-bubu=ToStruct.tostruct(ContractSection,JSON.parse(json(csection)))
-include("routes.jl")
-ToStruct.tostruct(ContractSection,JSON.parse(String(HTTP.request("POST", "http://localhost:8000/jsonpayload", [("Content-Type", "application/json")], """{"name":"Adrian"}""").body)))
+# bubu=ToStruct.tostruct(ContractSection,JSON.parse(JSON.json(csection)))
+# include("routes.jl")
+# ToStruct.tostruct(ContractSection,JSON.parse(String(HTTP.request("POST", "http://localhost:8000/jsonpayload", [("Content-Type", "application/json")], """{"name":"Adrian"}""").body)))
 
