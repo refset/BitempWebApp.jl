@@ -256,9 +256,9 @@ version = "0.22.7"
 
 [[deps.JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "8d3217a3599ac9371dbbb9f6fd3051c6b1c59b45"
+git-tree-sha1 = "007ab1efbda85da785caf1943d401a6e7556fc9a"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.9.8"
+version = "0.9.9"
 
 [[deps.LayerDicts]]
 git-tree-sha1 = "6087ad3521d6278ebe5c27ae55e7bbb15ca312cb"

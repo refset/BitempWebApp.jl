@@ -1,23 +1,20 @@
 push!(LOAD_PATH,"./src")
 push!(LOAD_PATH,"./app/resources/insurancecontracts")
-push!(LOAD_PATH,"./app/resources/insurancepartners")
 using Documenter
 using Pkg
 Pkg.add(url="https://github.com/michaelfliegner/BitemporalPostgres.jl")
 import BitempWebApp
-using InsuranceContractsController
-using InsurancePartnersController
+using InsuranceContracts, InsurancePartners
 
 makedocs(
     sitename = "BitempWebApp",
     format = Documenter.HTML(),
-    modules = [BitempWebApp,InsuranceContractsController,InsurancePartnersController],
+    modules = [BitempWebApp,InsuranceContracts, InsurancePartners],
     pages = [
         "Home" => "index.md",
         "BitempWebApp API" => [
             "BitempWebApp" => "api/BitempWebApp.md",
-            "InsuranceContractsController" => "api/InsuranceContractsController.md",
-            "InsurancePartnersController" => "api/InsurancePartnersController.md"
+            "InsuranceContractsController" => "api/InsuranceContractsController.md"
         ]
     ]
 )
