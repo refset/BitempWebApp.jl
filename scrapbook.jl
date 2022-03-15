@@ -77,17 +77,6 @@ using Genie, Genie.Router, Genie.Requests
     # end of mutations
 end
 
-# root = find(
-#     ValidityInterval,
-#     SQLWhereExpression("ref_history=? AND tsrdb @> now()", 5),
-# )[1]
-# shadowed = find(
-#     ValidityInterval,
-#     SQLWhereExpression(
-#         "ref_history=? AND tsdb_invalidfrom=? AND tstzrange(?,?) * tsrworld = tsrworld",
-#         root.ref_history,
-#         root.tsdb_validfrom,
-#         root.tsworld_validfrom,
-#         root.tsworld_invalidfrom,
-#     )
-# )
+hforest = mkforest(DbId(2), MaxDate, ZonedDateTime(1900, 1, 1, 0, 0, 0, 0, tz"UTC"), MaxDate)
+print_tree(hforest)
+
