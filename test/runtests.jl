@@ -12,7 +12,6 @@ Pkg.add("TimeZones")
 Pkg.add("Intervals")
 import InsuranceContractsController
 using InsuranceContractsController
-using InsurancePartnersController
 using BitemporalPostgres
 using SearchLight
 using SearchLightPostgreSQL
