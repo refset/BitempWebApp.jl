@@ -36,9 +36,11 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[deps.BitemporalPostgres]]
 deps = ["AbstractTrees", "Dates", "Intervals", "SearchLight", "SearchLightPostgreSQL", "Test", "TimeZones", "ToStruct"]
-git-tree-sha1 = "6a2588f55c682b5029b1a8bf28bd2b90fabc65a7"
+git-tree-sha1 = "8ac55d396e798041bfa95d3071cc3ca84fc0e250"
+repo-rev = "main"
+repo-url = "https://github.com/michaelfliegner/BitemporalPostgres.jl"
 uuid = "e513cd14-23e6-48df-acf1-d9bc8fa5674b"
-version = "0.1.7"
+version = "1.0.1"
 
 [[deps.CEnum]]
 git-tree-sha1 = "215a9aa4a1f23fbd05b92769fdd62559488d70e9"
@@ -261,9 +263,9 @@ version = "0.22.7"
 
 [[deps.JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "d4294ea0357f0496844d09a667109cf5b3b3eadb"
+git-tree-sha1 = "9c43a2eb47147a8776ca2ba489f15a9f6f2906f8"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.9.10"
+version = "0.9.11"
 
 [[deps.LayerDicts]]
 git-tree-sha1 = "6087ad3521d6278ebe5c27ae55e7bbb15ca312cb"

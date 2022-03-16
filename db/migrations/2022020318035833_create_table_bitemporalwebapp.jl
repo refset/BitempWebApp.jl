@@ -101,12 +101,45 @@ ALTER TABLE contractPartnerRefRevisions
 ADD CONSTRAINT contractpartnerrefbsversionrange EXCLUDE USING GIST (ref_component WITH =, ref_valid WITH &&)
 """    
 
+
+create_table(:tariffs) do
+  [
+    column(:id,:bigserial,"PRIMARY KEY")
+    column(:ref_history, :integer,"REFERENCES histories(id) ON DELETE CASCADE")
+    column(:ref_version, :integer,"REFERENCES versions(id) ON DELETE CASCADE")
+  ]
+  end
+
+  create_table(:tariffRevisions) do
+    [
+      column(:id,:bigserial,"PRIMARY KEY")
+      column(:ref_component, :integer, "REFERENCES tariffs(id) ON DELETE CASCADE")
+      column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+      column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+      column(:ref_valid, :int8range)
+      column(:description, :string)
+    ]
+  end
+
+  createTariffRevisionsTrigger = """
+  CREATE TRIGGER tr_versions_trig
+  BEFORE INSERT OR UPDATE ON tariffRevisions
+  FOR EACH ROW EXECUTE PROCEDURE f_versionrange();
+  """
+
+  createTariffRevisionsConstraints = """
+  ALTER TABLE tariffRevisions 
+  ADD CONSTRAINT tariffsversionrange EXCLUDE USING GIST (ref_component WITH =, ref_valid WITH &&)
+  """
+
   SearchLight.query(createContractRevisionsTrigger)
   SearchLight.query(createContractRevisionsConstraints)
   SearchLight.query(createPartnerRevisionsTrigger)
   SearchLight.query(createPartnerRevisionsConstraints)
   SearchLight.query(createContractPartnerRefRevisionsTrigger)
   SearchLight.query(createContractPartnerRefRevisionsConstraints)
+  SearchLight.query(createTariffRevisionsTrigger)
+  SearchLight.query(createTariffRevisionsConstraints)
 end 
 
 function down()
@@ -117,5 +150,8 @@ function down()
     drop_table(:contractPartnerRefs)
     drop_table(:partnerRevisions)
     drop_table(:partners)
+    drop_table(:tariffRevisions)
+    drop_table(:tariffs)
+
 end 
 end

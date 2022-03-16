@@ -1,5 +1,5 @@
 # InsuranceContractsController.jl
 
 ```@autodocs
-Modules = [InsuranceContracts, InsurancePartners]
+Modules = [InsuranceContracts, InsurancePartners, InsuranceTariffs]
 ```

@@ -3,6 +3,8 @@ drop table contractpartnerrefrevisions;
 drop table contractpartnerrefs;
 drop table partnerrevisions;
 drop table partners;
+drop table tariffrevisions;
+drop table tariffs;
 drop table testdummysubcomponentrevisions;
 drop table testdummysubcomponents;
 drop table testdummycomponentrevisions;

@@ -18,6 +18,9 @@ export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevisio
 include("InsurancePartners.jl")
 using .InsurancePartners
 export Partner, PartnerRevision
+include("InsuranceTariffs.jl")
+using .InsuranceTariffs
+export Tariff, TariffRevision
 export ContractSection, PartnerSection,csection
 export insurancecontracts_view
 

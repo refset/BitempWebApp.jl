@@ -4,12 +4,12 @@ using Documenter
 using Pkg
 Pkg.add(url="https://github.com/michaelfliegner/BitemporalPostgres.jl")
 import BitempWebApp
-using InsuranceContracts, InsurancePartners
+using InsuranceContracts, InsurancePartners, InsuranceTariffs
 
 makedocs(
     sitename = "BitempWebApp",
     format = Documenter.HTML(),
-    modules = [BitempWebApp,InsuranceContracts, InsurancePartners],
+    modules = [BitempWebApp,InsuranceContracts, InsurancePartners,InsuranceTariffs],
     pages = [
         "Home" => "index.md",
         "BitempWebApp API" => [
