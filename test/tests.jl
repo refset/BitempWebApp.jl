@@ -24,7 +24,6 @@ using Genie, Genie.Router, Genie.Requests
 @testset "scrapbook" begin
 
     SearchLight.Configuration.load() |> SearchLight.connect
-    run(```psql -f sqlsnippets/droptables.sql```)
     SearchLight.Migrations.create_migrations_table()
     BitemporalPostgres.up()
     SearchLight.Migrations.up()
