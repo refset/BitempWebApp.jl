@@ -14,7 +14,7 @@ import BitemporalPostgres
 using BitemporalPostgres
 include("InsuranceContracts.jl")
 using .InsuranceContracts
-export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision
+export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision, ProductItem, ProductItemRevision, ProductItemTariffRef, ProductItemTariffRefRevision
 include("InsurancePartners.jl")
 using .InsurancePartners
 export Partner, PartnerRevision
