@@ -8,7 +8,7 @@ using BitemporalPostgres
 """
 Contract
 
-  a component of a bitemporal entity
+  a contract component of a bitemporal entity
 
 """
 @kwdef mutable struct Contract <: BitemporalPostgres.Component
@@ -20,7 +20,7 @@ end
 """
 ContractRevision
 
-  a revision of a Contract component of a bitemporal entity
+  a revision of a contract component
 
 """
 @kwdef mutable struct ContractRevision <: BitemporalPostgres.ComponentRevision
@@ -34,7 +34,7 @@ end
 """
 ProductItem
 
-  a component of a bitemporal contract entity
+  a productitem component of a contract component
 
 """
 @kwdef mutable struct ProductItem <: BitemporalPostgres.SubComponent
@@ -47,7 +47,7 @@ end
 """
 ProductItemRevision
 
-  a revision of a ProductItem component of a bitemporal entity
+  a revision of a productitem component
 
 """
 @kwdef mutable struct ProductItemRevision <: BitemporalPostgres.ComponentRevision
@@ -63,7 +63,7 @@ end
 """
 ContractPartnerRef
 
-  a component of a bitemporal entity
+  a partner reference of a contract component, i.e. policy holder, premium payer
 
 """
 @kwdef mutable struct ContractPartnerRef <: BitemporalPostgres.SubComponent
@@ -76,7 +76,7 @@ end
 """
 ContractPartnerRefRevision
 
-  a revision of a Contract component of a bitemporal entity
+  a revision of a contract's partner reference
 
 """
 @kwdef mutable struct ContractPartnerRefRevision <: BitemporalPostgres.ComponentRevision
@@ -92,7 +92,7 @@ end
 """
 ProductItemTariffRef
 
-  a component of a bitemporal entity
+  a reference to a tariff of a productitem
 
 """
 @kwdef mutable struct ProductItemTariffRef <: BitemporalPostgres.SubComponent
@@ -105,7 +105,7 @@ end
 """
 ProductItemTariffRefRevision
 
-  a revision of a ProductItemTariffRef component of a bitemporal entity
+  a revision of a productitem's reference to a tariff
 
 """
 @kwdef mutable struct ProductItemTariffRefRevision  <: BitemporalPostgres.ComponentRevision
@@ -121,7 +121,7 @@ end
 """
 ProductItemPartnerRef
 
-  a component of a bitemporal entity 
+  a reference to a partner of a productitem, i.e. insured person
 
 """
 @kwdef mutable struct ProductItemPartnerRef <: BitemporalPostgres.SubComponent
@@ -134,7 +134,7 @@ end
 """
 ProductItemPartnerRefRevision
 
-  a revision of a ProductItemPartnerRef component of a bitemporal entity
+  a revision of a productItem's partner reference
 
 """
 @kwdef mutable struct ProductItemPartnerRefRevision  <: BitemporalPostgres.ComponentRevision
