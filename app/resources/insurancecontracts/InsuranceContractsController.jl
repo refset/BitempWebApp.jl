@@ -73,4 +73,37 @@ function insurancecontracts_view()
     html(:insurancecontracts, :insurancecontracts, contracts = all(ContractRevision))
   end
 
+function renderhistory()
+    [
+        Html.h1() do
+            "Billiam Gates' list of recommended books"
+        end
+        renderhforest(hforest, 0)
+    ]
+
+end
+
+function renderhforest(f, i)
+    Html.ul() do
+        for_each(f) do node
+            renderhnode(node, i + 1)
+        end
+    end
+end
+
+function renderhnode(node, i)
+    Html.li() do
+        "Version $(string(node.interval.ref_version.value))" *
+        if (!isempty(node.shadowed))
+            renderhforest(node.shadowed, i+1)
+        else ""
+        end
+    end
+
+end
+
+
+renderhistory()
+
+
 end #module
