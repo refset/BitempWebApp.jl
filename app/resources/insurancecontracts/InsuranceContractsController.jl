@@ -74,12 +74,7 @@ function insurancecontracts_view()
   end
 
 function renderhistory()
-    [
-        Html.h1() do
-            "Billiam Gates' list of recommended books"
-        end
-        renderhforest(hforest, 0)
-    ]
+        renderhforest(mkforest(DbId(3), MaxDate, ZonedDateTime(1900, 1, 1, 0, 0, 0, 0, tz"UTC"), MaxDate), 0)
 
 end
 
@@ -93,17 +88,22 @@ end
 
 function renderhnode(node, i)
     Html.li() do
-        "Version $(string(node.interval.ref_version.value))" *
-        if (!isempty(node.shadowed))
-            renderhforest(node.shadowed, i+1)
+        """Version $(string(node.interval.ref_version.value))""" *
+        if length(node.shadowed)>0
+            Html.span(class="caret") *
+            Html.ul(class="nested") do
+                renderhforest(node.shadowed, i+1)
+            end
         else ""
         end
     end
 
 end
 
-
-renderhistory()
-
+function historyforest_view()
+    html(:insurancecontracts, :historyforest, hforest = renderhistory()
+    )
+  end
 
 end #module
+

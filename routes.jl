@@ -10,6 +10,8 @@ end
 
 route("/contracts", InsuranceContractsController.insurancecontracts_view)
 
+route("/history", InsuranceContractsController.historyforest_view)
+
 route("/jsonpayload", method = POST) do
   if haskey(jsonpayload(),"command")
     if jsonpayload()["command"]=="createContract"
