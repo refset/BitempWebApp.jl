@@ -21,7 +21,7 @@ export Partner, PartnerRevision
 include("InsuranceTariffs.jl")
 using .InsuranceTariffs
 export Tariff, TariffRevision
-export ContractSection, PartnerSection,csection
+export ContractSection, PartnerSection,TariffSection, csection
 export insurancecontracts_view
 
 @kwdef mutable struct PartnerSection
@@ -38,7 +38,7 @@ end
     tsw_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
     ref_history::SearchLight.DbId = DbId(InfinityKey)
     ref_version::SearchLight.DbId = MaxVersion
-    tariff_revision::PartnerRevision = TariffRevision()
+    tariff_revision::TariffRevision = TariffRevision()
 end
 
 @kwdef mutable struct ContractSection

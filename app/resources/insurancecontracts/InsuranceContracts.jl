@@ -143,7 +143,7 @@ ProductItemPartnerRefRevision
   ref_validfrom::DbId = InfinityKey 
   ref_invalidfrom::DbId = InfinityKey 
   description::String = ""
-  ref_tariff::DbId = InfinityKey 
+  ref_partner::DbId = InfinityKey 
 end
 
 end

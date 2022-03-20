@@ -59,6 +59,10 @@ commit_workflow!(w0)
     pitr = ProductItemTariffRef(ref_super = cpi.id)
     pitrr = ProductItemTariffRefRevision(ref_tariff = t.id, description = "blue")
 
+        
+    pipr = ProductItemPartnerRef(ref_super = cpi.id)
+    piprr = ProductItemPartnerRefRevision(ref_partner = p.id, description = "blue")
+
     w1 = Workflow(
         tsw_validfrom = ZonedDateTime(2014, 5, 30, 21, 0, 1, 1, tz"Africa/Porto-Novo"),
     )
@@ -67,6 +71,7 @@ commit_workflow!(w0)
     create_subcomponent!(c, cpr, cprr, w1)
     create_subcomponent!(c, cpi, cpir, w1)
     create_subcomponent!(cpi, pitr, pitrr, w1)
+    create_subcomponent!(cpi, pipr, piprr, w1)
     commit_workflow!(w1)
 
 # update Contract yellow
