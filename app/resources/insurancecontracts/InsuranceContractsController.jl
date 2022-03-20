@@ -14,7 +14,7 @@ import BitemporalPostgres
 using BitemporalPostgres
 include("InsuranceContracts.jl")
 using .InsuranceContracts
-export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision, ProductItem, ProductItemRevision, ProductItemTariffRef, ProductItemTariffRefRevision
+export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision, ProductItem, ProductItemRevision, ProductItemTariffRef, ProductItemTariffRefRevision,ProductItemPartnerRef, ProductItemPartnerRefRevision
 include("InsurancePartners.jl")
 using .InsurancePartners
 export Partner, PartnerRevision
@@ -32,6 +32,15 @@ export insurancecontracts_view
     partner_revision::PartnerRevision = PartnerRevision()
 end
 
+
+@kwdef mutable struct TariffSection
+    tsdb_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
+    tsw_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
+    ref_history::SearchLight.DbId = DbId(InfinityKey)
+    ref_version::SearchLight.DbId = MaxVersion
+    tariff_revision::PartnerRevision = TariffRevision()
+end
+
 @kwdef mutable struct ContractSection
     tsdb_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
     tsw_validfrom::TimeZones.ZonedDateTime = now(tz"UTC")
@@ -39,7 +48,10 @@ end
     ref_version::SearchLight.DbId = MaxVersion
     contract_revision::ContractRevision = ContractRevision()
     contractpartnerref_revision::ContractPartnerRefRevision = ContractPartnerRefRevision()
-    ref_entities::Dict{DbId,Union{PartnerSection,ContractSection}} = Dict{DbId,Union{PartnerSection,ContractSection}}()
+    productitem_revision::ProductItemRevision = ProductItemRevision(position=0)
+    productitem_tariffref_revision::ProductItemTariffRefRevision = ProductItemTariffRefRevision()
+    productitem_partnerref_revision::ProductItemPartnerRefRevision = ProductItemPartnerRefRevision()
+    ref_entities::Dict{DbId,Union{PartnerSection,ContractSection,TariffSection}} = Dict{DbId,Union{PartnerSection,ContractSection,TariffSection}}()
 end
 
 
@@ -70,12 +82,11 @@ function createContract()
 end
 
 function insurancecontracts_view()
-    html(:insurancecontracts, :insurancecontracts, contracts = all(ContractRevision))
+    html(:insurancecontracts, :insurancecontracts, contracts = all(Contract))
   end
 
-function renderhistory()
-        renderhforest(mkforest(DbId(3), MaxDate, ZonedDateTime(1900, 1, 1, 0, 0, 0, 0, tz"UTC"), MaxDate), 0)
-
+function renderhistory(history_id::Int)
+        renderhforest(mkforest(DbId(history_id), MaxDate, ZonedDateTime(1900, 1, 1, 0, 0, 0, 0, tz"UTC"), MaxDate), 0)
 end
 
 function renderhforest(f, i)
@@ -100,8 +111,8 @@ function renderhnode(node, i)
 
 end
 
-function historyforest_view()
-    html(:insurancecontracts, :historyforest, hforest = renderhistory()
+function historyforest_view(history_id::Int)
+    html(:insurancecontracts, :historyforest, hforest = renderhistory(history_id), hid=history_id, entitytype="Contract"
     )
   end
 

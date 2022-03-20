@@ -2,7 +2,7 @@ module InsuranceContracts
 import BitemporalPostgres
 import SearchLight: DbId
 import Base: @kwdef
-export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision, ProductItem, ProductItemRevision, ProductItemTariffRef, ProductItemTariffRefRevision
+export Contract, ContractRevision, ContractPartnerRef, ContractPartnerRefRevision, ProductItem, ProductItemRevision, ProductItemTariffRef, ProductItemTariffRefRevision, ProductItemPartnerRef, ProductItemPartnerRefRevision
 using BitemporalPostgres
 
 """
