@@ -9,6 +9,8 @@ This is meant to become a prototype of a bitemporal data management system for l
 ![Contract model](docs/src/assets/BitemporalModel.uxf.png)
 
 # Screenshots
+The database for these pages was populated by test/tests.jl
+
 ![Contract model](docs/src/assets/ContractsPage.PNG)
 ![Contract model](docs/src/assets/HistoryPage.PNG)
 History page showing shadowed version
