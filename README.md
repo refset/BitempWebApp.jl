@@ -18,6 +18,6 @@ History page showing shadowed version
 ![Contract model](docs/src/assets/HistoryPageUnfolded.PNG)
 ![Contract model](docs/src/assets/CsectionPage.PNG)
 
-For more information look at the project for its persistence kernel
+For theoretical background and generic aspects of the model look at the project for its persistence kernel
 
 https://github.com/michaelfliegner/BitemporalPostgres.jl
