@@ -16,16 +16,23 @@ route("/history") do
   InsuranceContractsController.historyforest_view(parse(Int,history_id))
 end
 
+route("/csection") do
+  history_id = params(:history_id, "0")
+  version_id = params(:version_id, "0")
+  println("history_id= " * history_id * " version_id= " * version_id)
+  InsuranceContractsController.csection_view(parse(Int,history_id),parse(Int,version_id))
+end
+
 
 route("/jsonpayload", method = POST) do
-  if haskey(jsonpayload(),"command")
-    if jsonpayload()["command"]=="createContract"
-      json(InsuranceContractsController.createContract())
-    else
-      json(Dict{String, Any}("error" => "only csection recognizable"))
-    end
+  if haskey(jsonpayload(), "command")
+      if jsonpayload()["command"] == "showsection"
+          JSON.json(InsuranceContractsController.csection(3,3))
+      else
+          JSON.json(Dict{String,Any}("error" => "only showsection recognizable"))
+      end
   else
-    json(jsonpayload())
+      JSON.json(jsonpayload())
   end
 end
 

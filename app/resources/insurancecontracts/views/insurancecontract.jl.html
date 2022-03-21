@@ -1,0 +1,20 @@
+<!-- insurancecontracts.jl.html -->
+<h1>Insurance Contract
+   history id $(csect.ref_history.value) version id $(csect.ref_version.value)
+</h1>
+<ul> Contract
+   <li>description $(csect.contract_revision.description)</li>
+   <ul> Policy Holder
+      <li>id $(csect.contract_partnerref_revision.ref_partner)</li>
+   </ul>
+   <ul> Product Item
+      <li>position $(csect.productitem_revision.position) description $(csect.productitem_revision.description)</li>
+      <ul> Tariff
+         <li>id $(csect.productitem_tariffref_revision.ref_tariff)</li>
+      </ul>
+      <ul> Insured Person
+         <li>id $(csect.productitem_partnerref_revision.ref_partner)</li>
+      </ul>
+   </ul>
+</ul>
+

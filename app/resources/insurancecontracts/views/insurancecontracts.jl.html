@@ -1,8 +1,8 @@
 <!-- insurancecontracts.jl.html -->
-<h1>list of insurance contracts) </h1>
+<h1>List of Insurance Contracts</h1>
 <ul>
   <% for_each(contracts) do contract %>
-    <li>$(contract.id) <a href=$("history?history_id=$(contract.ref_history.value)") >show mutation history</a></li>
+    <li>$(contract.ref_history.value) <a href=$("history?history_id=$(contract.ref_history.value)") >show mutation history</a></li>
   <% end %> 
 </ul>
 
