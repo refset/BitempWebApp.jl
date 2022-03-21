@@ -11,7 +11,7 @@ This is meant to become a prototype of a bitemporal data management system for l
 # Screenshots
 ![Contract model](docs/src/assets/ContractsPage.PNG)
 ![Contract model](docs/src/assets/HistoryPage.PNG)
-History page showing shadowed version
+History page showing also shadowed, i.e. retrospectively corrected versions
 ![Contract model](docs/src/assets/HistoryPageUnfolded.PNG)
 ![Contract model](docs/src/assets/CsectionPage.PNG)
 
