@@ -14,8 +14,8 @@ For the script populating the database for these pages [see: test/test.jl]( test
 
 ![Contract model](docs/src/assets/ContractsPage.PNG)
 ![Contract model](docs/src/assets/Historypage.PNG)
-History page showing also shadowed, i.e. retrospectively corrected versions
-![Contract model](docs/src/assets/HistorypageUnfolded.PNG)
+History page unfolded, showing also shadowed, i.e. retrospectively corrected versions
+![Contract model](docs/src/assets/HistorypageUnfolded.PNG)b
 ![Contract model](docs/src/assets/CsectionPage.PNG)
 
 For theoretical background and generic aspects of the model look at the project for its persistence kernel
