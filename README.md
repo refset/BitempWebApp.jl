@@ -13,9 +13,9 @@ This is meant to become a prototype of a bitemporal data management system for l
 For the script populating the database for these pages [see: test/test.jl]( test/tests.jl)
 
 ![Contract model](docs/src/assets/ContractsPage.PNG)
-![Contract model](docs/src/assets/HistoryPage.PNG)
+![Contract model](docs/src/assets/Historypage.PNG)
 History page showing also shadowed, i.e. retrospectively corrected versions
-![Contract model](docs/src/assets/HistoryPageUnfolded.PNG)
+![Contract model](docs/src/assets/HistorypageUnfolded.PNG)
 ![Contract model](docs/src/assets/CsectionPage.PNG)
 
 For theoretical background and generic aspects of the model look at the project for its persistence kernel
