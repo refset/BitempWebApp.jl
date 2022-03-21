@@ -5,7 +5,8 @@
 
 [![pages-build-deployment](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/pages/pages-build-deployment)
 
-This is meant to become a prototype of a bitemporal data management system for life insurance
+This is meant to become a prototype of a bitemporal data management system for life insurance. We start with a structure only model without domain specific attributes, for a beginning concentrating on bitemporal data management.
+
 ![Contract model](docs/src/assets/BitemporalModel.uxf.png)
 
 # Screenshots
