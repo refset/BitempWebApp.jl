@@ -36,9 +36,9 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[deps.BitemporalPostgres]]
 deps = ["AbstractTrees", "Dates", "Intervals", "SearchLight", "SearchLightPostgreSQL", "Test", "TimeZones", "ToStruct"]
-git-tree-sha1 = "5b7dbb3593249dcf2a53d30a24213b95645156df"
+git-tree-sha1 = "4a6dd4ce477d76a8288940a60fc361ff165f0457"
 uuid = "e513cd14-23e6-48df-acf1-d9bc8fa5674b"
-version = "1.0.1"
+version = "1.0.2"
 
 [[deps.CEnum]]
 git-tree-sha1 = "215a9aa4a1f23fbd05b92769fdd62559488d70e9"
@@ -56,6 +56,18 @@ deps = ["InteractiveUtils", "UUIDs"]
 git-tree-sha1 = "9fb640864691a0936f94f89150711c36072b0e8f"
 uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
 version = "1.0.8"
+
+[[deps.ColorTypes]]
+deps = ["FixedPointNumbers", "Random"]
+git-tree-sha1 = "024fe24d83e4a5bf5fc80501a314ce0d1aa35597"
+uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
+version = "0.11.0"
+
+[[deps.Colors]]
+deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
+git-tree-sha1 = "417b0ed7b8b838aa6ca0a87aadf1bb9eb111ce40"
+uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
+version = "0.12.8"
 
 [[deps.CommonMark]]
 deps = ["Crayons", "JSON", "URIs"]
@@ -148,6 +160,12 @@ version = "0.9.18"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
+
+[[deps.FixedPointNumbers]]
+deps = ["Statistics"]
+git-tree-sha1 = "335bfdceacc84c5cdf16aadc768aa5ddfc5383cc"
+uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
+version = "0.8.4"
 
 [[deps.Formatting]]
 deps = ["Printf"]
@@ -556,6 +574,12 @@ deps = ["FilePathsBase", "Genie", "JSON3", "Logging", "Mixers", "Observables", "
 git-tree-sha1 = "c3840b4b93413692e21685a8336bb50d3068080a"
 uuid = "4acbeb90-81a0-11ea-1966-bdaff8155998"
 version = "0.21.2"
+
+[[deps.StippleUI]]
+deps = ["Colors", "DataFrames", "Dates", "Genie", "Stipple"]
+git-tree-sha1 = "b0d8dfb680dd2b6773be1cb53f096a5c512b91b2"
+uuid = "a3c5d34a-b254-4859-a8fa-b86abb7e84a3"
+version = "0.16.0"
 
 [[deps.StringEncodings]]
 deps = ["Libiconv_jll"]

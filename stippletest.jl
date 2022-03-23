@@ -1,14 +1,11 @@
-using Genie, Genie.Router, Genie.Renderer.Html, Stipple
+using Stipple
 
-Base.@kwdef mutable struct Name <: ReactiveModel
-  name::R{String} = "World!"
+@reactive mutable struct Name <: ReactiveModel
+  name::R{Vector{String}} = ["World!","Heaven"]
 end
 
-model = Stipple.init(Name)
-
-function ui()
-  page(
-    root(model), class="container", [
+function ui(model)
+  page( model, class="container", [
       h1([
         "Hello "
         span("", @text(:name))
@@ -16,12 +13,21 @@ function ui()
 
       p([
         "What is your name? "
-        input("", placeholder="Type your name", @bind(:name))
+        input("", placeholder="Type your name", @bind(Symbol("name[0]")))
       ])
-    ], title="Basic Stipple"
-  ) |> html
+
+      p([
+        "What is your name? "
+        input("", placeholder="Type your name", @bind(Symbol("name[1]")))
+      ])
+
+    ]
+  )
 end
 
-route("/", ui)
+route("/") do
+  model = Name |> init
+  html(ui(model), context = @__MODULE__)
+end
 
-up()
+up() # or `up(open_browser = true)` to automatically open a browser window/tab when launching the app
