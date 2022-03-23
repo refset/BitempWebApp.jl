@@ -15,17 +15,20 @@ end
 function ui(model)
     layout(
         page(
-            model,onload="initTreeView()",
+            model,
             class = "container",
             [
-                h1([
-                    "Hello "
-                    span("", @text(:name))
-                ])
-                ul(
-                    class = "caret", 
+                h1(
+                    onload = "initTreeView()",
                     [
-                        "What is your name? "
+                        "Hello "
+                        span("", @text(:name))
+                    ],
+                )
+                ul(
+                    class = "caret",
+                    [
+                        "1 What is your name? "
                         input(
                             "",
                             placeholder = "Type your name",
@@ -34,7 +37,7 @@ function ui(model)
                         ul(
                             class = "nested",
                             [
-                                "What is your name? "
+                                "1 1 What is your name? "
                                 input(
                                     "",
                                     placeholder = "Type your name",
@@ -47,7 +50,7 @@ function ui(model)
                 ul(
                     class = "caret",
                     [
-                        "What is your name? "
+                        "2 What is your name? "
                         input(
                             "",
                             placeholder = "Type your name",
@@ -55,11 +58,26 @@ function ui(model)
                         )
                     ],
                 )
+                script("src=/js/application.js")
             ],
         ),
         head_content = """
           <title>Genie :: The highly productive MICHIS Julia web framework</title>
-          <link href="/css/application.css" rel="stylesheet">
+          <link href="/css/application.css" rel="stylesheet
+          <script>
+          function initTreeView() {
+            var toggler = document.getElementsByClassName("caret");
+            var i;
+              alert("Moin, moin!")
+              for (i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function() {
+                  this.parentElement.querySelector(".nested").classList.toggle("active");
+                  this.classList.toggle("caret-down");
+                });
+              }
+            }
+bb
+          </script>
           """,
     )
 end

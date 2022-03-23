@@ -1,43 +1,46 @@
-using Genie, Stipple, StippleUI, StippleUI.API
-import Genie.Renderer.Html: HTMLString, normal_element, register_normal_element
+using Genie.Renderer.Html, Stipple, StippleUI
 
+@reactive mutable struct Model <: ReactiveModel
+  process::R{Bool} = true
+  output::R{String} = "buba"
+  input::R{String} = ""
 
-register_normal_element("q__tree", context = @__MODULE__)
-
-function tree(args...; kwargs...)
-  q__tree(args...; kw(kwargs)...)
 end
 
+function handlers(model)
+  on(model.process) do 
+    println("huhu")
+    if (model.process[])
+      model.output[] = model.input[] |> reverse
+      model.process[] = false
+    end
+  endb
 
-@reactive mutable struct TreeModel <: ReactiveModel
-  expanded::R{Vector{String}} = [ "Satisfied customers (with avatar)", "Good food (with icon)" ]
-  children::R{Vector{Dict{String, String}}} = [
-    Dict("label" => "Good food (with icon)", "label" => "Good recipe")
-  ]
-  simple::R{Vector{Vector{Dict{String, Union{String, Vector{Dict{String, String}}}}}}} = [
-    [
-     Dict( "label" => "Satisfied customers (with avatar)",
-          "avatar" => "https://cdn.quasar.dev/img/boy-avatar.png",
-          "children" => children)
-    ],
-  ]
+  model
 end
 
+function ui(model)
+  page(model, class="container", [
+      p([
+        "Input "
+        input("", @bind(:input), @on("keyup.enter", "process = true"))
+      ])
 
-function ui(tree_model)
-  page(
-    tree_model,
-    title = "Tree Components",
-    class = "container",
-    [
-       tree(:simple, nodekey="label")
-    ],
+      p([
+        button("Action!", @click("process = true"))
+      ])
+
+      p([
+        "Output: "
+        span("", @text(:output))
+      ])
+    ]
   )
 end
 
 route("/") do
-    tree_model = TreeModel |> init
-    html(ui(tree_model), context = @__MODULE__)
+  model = Model |> init |> handlers
+  html(ui(model), context = @__MODULE__)
 end
 
-up(async = true)
+isrunning(:webserver) || up()

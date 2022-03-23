@@ -4,51 +4,69 @@ import Base: @kwdef
 
 
 @kwdef mutable struct Person
-    name::String = "Fliegner"
+    name::String = "FliegnerX"
     given_name::String = "Michael"
 end
 
-@reactive mutable struct Name <: ReactiveModel
-    name::R{Person} = Person()
+@reactive! mutable struct MFLModel <: ReactiveModel
+    person::R{Person} = Person()
 end
+
 
 function ui(model)
     layout(
         page(
             model,
-            onload = "initTreeView()",
             class = "container",
             [
-                h1([b
+                h1([
                     "Hello "
-                    span("", @text(:name))
+                    span("", @text(Symbol("person.name")))
                 ])
-                row(
-                    [
-                      cell([btn("Less! ", @click("initTreeView()"))])
-                    ]
-                )
-                li() do
-                    "What is your name? "
-                    input("", placeholder = "Type your name", @bind(Symbol("name.name")))
-                    span(class = "caret")
-                    ul(class = "nested") do
-                        "What is your name? "
-                        input(
-                            "",
-                            placeholder = "Type your name",
-                            @bind(Symbol("name.given_name"))
-                        )
-                    end
-                end
                 ul(
                     class = "caret",
                     [
-                        "What is your name? "
+                        "What is your name? 1 "
                         input(
                             "",
                             placeholder = "Type your name",
-                            @bind(Symbol("name.given_name"))
+                            @bind(Symbol("person.name"))
+                        )
+                        if model.person.name == "Fliegner"
+                            ul(
+                                class = "caret",
+                                [
+                                    "What is your name? 1.1"
+                                    input(
+                                        "",
+                                        placeholder = "Type your name",
+                                        @bind(Symbol("person.given_name"))
+                                    )
+                                ],
+                            )
+                        else
+                            ul(
+                                class = "caret",
+                                [
+                                    "What is your hidden name? 1.1"
+                                    input(
+                                        "",
+                                        placeholder = "Type your name",
+                                        @bind(Symbol("person.given_name"))
+                                    )
+                                ],
+                            )
+                        end
+                    ],
+                )
+                ul(
+                    class = "caret",
+                    [
+                        "What is your name? 2"
+                        input(
+                            "",
+                            placeholder = "Type your name",
+                            @bind(Symbol("person.given_name"))
                         )
                     ],
                 )
@@ -61,9 +79,14 @@ function ui(model)
     )
 end
 
-route("/") do
-    model = Name |> init
-    html(ui(model), context = @__MODULE__)
+function start()
+    global model
+    route("/") do
+        model = MFLModel |> init
+        html(ui(model), context = @__MODULE__)
+    end
+    up() 
 end
 
-up() # or `up(open_browser = true)` to automatically open a browser window/tab when launching the app
+start()
+# or `up(open_browser = true)` to automatically open a browser window/tab when launching the app
