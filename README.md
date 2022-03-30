@@ -10,7 +10,7 @@ This is meant to become a prototype of a bitemporal data management system for l
 ![Contract model](docs/src/assets/BitemporalModel.uxf.png)
 
 # Screenshots
-For the script populating the database for these pages [see: test/test.jl]( test/testCreateContract.jl)
+For the script populating the database for these pages [see: test/testCreateContract.jl]( test/testCreateContract.jl)
 ![Contract model](docs/src/assets/ContractsPage.PNG)
 ![Contract model](docs/src/assets/Historypage.PNG)
 History page unfolded, showing also shadowed, i.e. retrospectively corrected versions
