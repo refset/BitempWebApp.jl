@@ -32,17 +32,17 @@ function up()
     create_table(:contracts) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_history, :integer, "REFERENCES histories(id) ON DELETE CASCADE")
-            column(:ref_version, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_history, :bigint, "REFERENCES histories(id) ON DELETE CASCADE")
+            column(:ref_version, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
         ]
     end
 
     create_table(:contractRevisions) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_component, :integer, "REFERENCES contracts(id) ON DELETE CASCADE")
-            column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_component, :bigint, "REFERENCES contracts(id) ON DELETE CASCADE")
+            column(:ref_validfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_invalidfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
             column(:ref_valid, :int8range)
             column(:description, :string)
         ]
@@ -57,9 +57,9 @@ function up()
     create_table(:productItems) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_history, :integer, "REFERENCES histories(id) ON DELETE CASCADE")
-            column(:ref_version, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_super, :integer, "REFERENCES contracts(id) ON DELETE CASCADE")
+            column(:ref_history, :bigint, "REFERENCES histories(id) ON DELETE CASCADE")
+            column(:ref_version, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_super, :bigint, "REFERENCES contracts(id) ON DELETE CASCADE")
         ]
     end
 
@@ -68,12 +68,12 @@ function up()
             column(:id, :bigserial, "PRIMARY KEY")
             column(
                 :ref_component,
-                :integer,
+                :bigint,
                 "REFERENCES productitems(id) ON DELETE CASCADE",
             )
-            column(:position, :integer)
-            column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:position, :bigint)
+            column(:ref_validfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_invalidfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
             column(:ref_valid, :int8range)
             column(:description, :string)
         ]
@@ -88,17 +88,17 @@ function up()
     create_table(:partners) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_history, :integer, "REFERENCES histories(id) ON DELETE CASCADE")
-            column(:ref_version, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_history, :bigint, "REFERENCES histories(id) ON DELETE CASCADE")
+            column(:ref_version, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
         ]
     end
 
     create_table(:partnerRevisions) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_component, :integer, "REFERENCES partners(id) ON DELETE CASCADE")
-            column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_component, :bigint, "REFERENCES partners(id) ON DELETE CASCADE")
+            column(:ref_validfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_invalidfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
             column(:ref_valid, :int8range)
             column(:description, :string)
         ]
@@ -113,9 +113,9 @@ function up()
     create_table(:contractPartnerRefs) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_history, :integer, "REFERENCES histories(id) ON DELETE CASCADE")
-            column(:ref_version, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_super, :integer, "REFERENCES contracts(id) ON DELETE CASCADE")
+            column(:ref_history, :bigint, "REFERENCES histories(id) ON DELETE CASCADE")
+            column(:ref_version, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_super, :bigint, "REFERENCES contracts(id) ON DELETE CASCADE")
         ]
     end
 
@@ -124,14 +124,14 @@ function up()
             column(:id, :bigserial, "PRIMARY KEY")
             column(
                 :ref_component,
-                :integer,
+                :bigint,
                 "REFERENCES contractPartnerRefs(id) ON DELETE CASCADE",
             )
-            column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_validfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_invalidfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
             column(:ref_valid, :int8range)
             column(:description, :string)
-            column(:ref_partner, :integer, "REFERENCES partners(id) ON DELETE CASCADE")
+            column(:ref_partner, :bigint, "REFERENCES partners(id) ON DELETE CASCADE")
         ]
     end
 
@@ -144,17 +144,17 @@ function up()
     create_table(:tariffs) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_history, :integer, "REFERENCES histories(id) ON DELETE CASCADE")
-            column(:ref_version, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_history, :bigint, "REFERENCES histories(id) ON DELETE CASCADE")
+            column(:ref_version, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
         ]
     end
 
     create_table(:tariffRevisions) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_component, :integer, "REFERENCES tariffs(id) ON DELETE CASCADE")
-            column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_component, :bigint, "REFERENCES tariffs(id) ON DELETE CASCADE")
+            column(:ref_validfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_invalidfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
             column(:ref_valid, :int8range)
             column(:description, :string)
         ]
@@ -169,9 +169,9 @@ function up()
     create_table(:productItemTariffRefs) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_history, :integer, "REFERENCES histories(id) ON DELETE CASCADE")
-            column(:ref_version, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_super, :integer, "REFERENCES productitems(id) ON DELETE CASCADE")
+            column(:ref_history, :bigint, "REFERENCES histories(id) ON DELETE CASCADE")
+            column(:ref_version, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_super, :bigint, "REFERENCES productitems(id) ON DELETE CASCADE")
         ]
     end
 
@@ -180,14 +180,14 @@ function up()
             column(:id, :bigserial, "PRIMARY KEY")
             column(
                 :ref_component,
-                :integer,
+                :bigint,
                 "REFERENCES productItemTariffRefs(id) ON DELETE CASCADE",
             )
-            column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_validfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_invalidfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
             column(:ref_valid, :int8range)
             column(:description, :string)
-            column(:ref_tariff, :integer, "REFERENCES tariffs(id) ON DELETE CASCADE")
+            column(:ref_tariff, :bigint, "REFERENCES tariffs(id) ON DELETE CASCADE")
         ]
     end
 
@@ -200,9 +200,9 @@ function up()
     create_table(:productItemPartnerRefs) do
         [
             column(:id, :bigserial, "PRIMARY KEY")
-            column(:ref_history, :integer, "REFERENCES histories(id) ON DELETE CASCADE")
-            column(:ref_version, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_super, :integer, "REFERENCES productitems(id) ON DELETE CASCADE")
+            column(:ref_history, :bigint, "REFERENCES histories(id) ON DELETE CASCADE")
+            column(:ref_version, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_super, :bigint, "REFERENCES productitems(id) ON DELETE CASCADE")
         ]
     end
 
@@ -211,14 +211,14 @@ function up()
             column(:id, :bigserial, "PRIMARY KEY")
             column(
                 :ref_component,
-                :integer,
+                :bigint,
                 "REFERENCES productItemPartnerRefs(id) ON DELETE CASCADE",
             )
-            column(:ref_validfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
-            column(:ref_invalidfrom, :integer, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_validfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
+            column(:ref_invalidfrom, :bigint, "REFERENCES versions(id) ON DELETE CASCADE")
             column(:ref_valid, :int8range)
             column(:description, :string)
-            column(:ref_partner, :integer, "REFERENCES partners(id) ON DELETE CASCADE")
+            column(:ref_partner, :bigint, "REFERENCES partners(id) ON DELETE CASCADE")
         ]
     end
 
