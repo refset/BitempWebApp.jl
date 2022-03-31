@@ -10,7 +10,7 @@ This is meant to become a prototype of a bitemporal data management system for l
 We start with a structure only model without domain specific attributes, for a beginning concentrating on editing (using the API for now) and displaying the bitemporal model. The aim is to eventually
 * include a tariff calculator based on examples from https://github.com/JuliaActuary/LifeContingencies.jl and to
 * provide a reactive GUI based on Stipple: https://github.com/GenieFramework/Stipple.jl 
-
+* Protypically provide complete workflows for managing life insurance contracts.
 
 ![Contract model](docs/src/assets/BitemporalModel.uxf.png)
 
