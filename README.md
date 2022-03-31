@@ -5,7 +5,14 @@
 
 [![pages-build-deployment](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/michaelfliegner/BitempWebApp/actions/workflows/pages/pages-build-deployment)
 
-This is meant to become a prototype of a bitemporal data management system for life insurance. We start with a structure only model without domain specific attributes, for a beginning concentrating on editing (using the API for now) and displaying the bitemporal model.
+This is meant to become a prototype of a bitemporal data management system for life insurance. For theoretical background and generic aspects of the model look at the project for its persistence kernel https://github.com/michaelfliegner/BitemporalPostgres.jl.
+
+We start with a structure only model without domain specific attributes, for a beginning concentrating on editing (using the API for now) and displaying the bitemporal model. The aim is to eventually
+* include a tariff calculator based on examples from https://github.com/JuliaActuary/LifeContingencies.jl and to
+* provide a reactive GUI based on Stipple: https://github.com/GenieFramework/Stipple.jl 
+* protypically provide complete workflows for managing life insurance contracts.
+
+in cooperation with http://www.actuarialsciencesforafrica.org/index_en.html
 
 ![Contract model](docs/src/assets/BitemporalModel.uxf.png)
 
@@ -16,7 +23,3 @@ For the script populating the database for these pages [see: test/testsCreateCon
 History page unfolded, showing also shadowed, i.e. retrospectively corrected versions
 ![Contract model](docs/src/assets/HistorypageUnfolded.PNG)b
 ![Contract model](docs/src/assets/CsectionPage.PNG)
-
-For theoretical background and generic aspects of the model look at the project for its persistence kernel
-
-https://github.com/michaelfliegner/BitemporalPostgres.jl
