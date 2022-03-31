@@ -35,59 +35,42 @@ function handlers(model)
 end
 
 function ui(model)
+    pinputs = ""
+    for i = 1:length(model.name[])
+        pinputs =
+            pinputs * p(
+                [
+                    "DynamicName Person $(i)"
+                    input(
+                        "",
+                        @bind(Symbol("name[$(i-1)]")),
+                        @on("keyup.enter", "process = true")
+                    )
+                ],
+            )
+        pinputs =
+            pinputs * p(
+                [
+                    "Dynamic Given Person $(i)"
+                    input(
+                        "",
+                        @bind(Symbol("given[$(i-1)]")),
+                        @on("keyup.enter", "process = true")
+                    )
+                ],
+            )
+    end
+    println("pinputs")
+    println(pinputs)
     page(
         model,
         class = "container",
         [
+            pinputs
             p([
                 "Input "
                 input("", @bind(:input), @on("keyup.enter", "process = true"))
             ])
-            p(
-                [
-                    "Name Person 1"
-                    input(
-                        "",
-                        @bind(Symbol("name[0]")),
-                        @on("keyup.enter", "process = true")
-                    )
-                ],
-            )
-            p(
-                [
-                    "Name Person 2"
-                    input(
-                        "",
-                        @bind(Symbol("name[1]")),
-                        @on("keyup.enter", "process = true")
-                    )
-                ],
-            )
-            p([button("Action!", @click("process = true"))])
-            p([
-                "Output: "
-                span("", @text(:output))
-            ])
-            p(
-                [
-                    "Given: Person 1 "
-                    input(
-                        "",
-                        @bind(Symbol("given[0]")),
-                        @on("keyup.enter", "process = true")
-                    )
-                ],
-            )
-            p(
-                [
-                    "Given: Person 2"
-                    input(
-                        "",
-                        @bind(Symbol("given[1]")),
-                        @on("keyup.enter", "process = true")
-                    )
-                ],
-            )
             StippleUI.form(
                 action = "/sub",
                 method = "POST",
@@ -135,6 +118,7 @@ route("/sub", method = POST) do
     age = params(:age, "99")
     name = params(:name, "Schnipperdey")
     println("PARAMS " * name * "  " * string(age))
+    model.name = ["a", "b", "Schnipperdey"]
     redirect("/")
 end
 
