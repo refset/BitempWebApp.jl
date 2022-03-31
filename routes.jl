@@ -1,8 +1,7 @@
 
 push!(LOAD_PATH,"app/resources/insurancecontracts")
-import InsuranceContractsController
-using Genie, Genie.Router, Genie.Requests, Genie.Renderer.Json
-
+import InsuranceContractsController, StippleController
+using Genie, Genie.Router, Genie.Requests, Genie.Renderer.Html, Genie.Renderer.Json, Stipple, StippleController
 
 route("/") do
   serve_static_file("welcome.html")
@@ -35,5 +34,20 @@ route("/jsonpayload", method = POST) do
       JSON.json(jsonpayload())
   end
 end
+
+model = handlers(Stipple.init(Model; transport = Genie.WebThreads))
+
+route("/reactive") do
+  html(ui(model), context = ctx = @__MODULE__)
+end
+
+route("/sub", method = POST) do
+  age = params(:age, "99")
+  name = params(:name, "Schnipperdey")
+  println("PARAMS " * name * "  " * string(age))
+  model.name = ["a", "b", "Schnipperdey"]
+  redirect("/reactive")
+end
+
 
 Genie.up()

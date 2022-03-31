@@ -1,6 +1,7 @@
-module Bubu
+module StippleController
 
 using Genie.Renderer.Html, Genie.Renderer, Stipple, StippleUI
+export Model, ui, handlers
 
 @reactive mutable struct Model <: ReactiveModel
     process::R{Bool} = false
@@ -104,20 +105,6 @@ function ui(model)
 end
 
 
-model = handlers(Stipple.init(Model; transport = Genie.WebThreads))
-
-route("/reactive") do
-    html(ui(model), context = @__MODULE__)
-end
-
-route("/sub", method = POST) do
-    age = params(:age, "99")
-    name = params(:name, "Schnipperdey")
-    println("PARAMS " * name * "  " * string(age))
-    model.name = ["a", "b", "Schnipperdey"]
-    redirect("/reactive")
-end
 
 
-isrunning(:webserver) || up()
 end #module
