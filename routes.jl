@@ -35,6 +35,8 @@ route("/jsonpayload", method = POST) do
   end
 end
 
+initModel()
+
 route("/reactive") do
   StippleController.render()
 end
