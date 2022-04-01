@@ -1,7 +1,7 @@
 module StippleController
 
 using Genie.Renderer.Html, Genie.Renderer, Stipple, StippleUI
-export Model, ui, handlers
+export Model, render
 
 @reactive mutable struct Model <: ReactiveModel
     process::R{Bool} = false
@@ -11,7 +11,9 @@ export Model, ui, handlers
     given::R{Vector{String}} = ["michael", "irmgard"]
     age::R{Int} = 0
     warin::R{Bool} = true
-end
+endb
+
+global model = Stipple.init(Model(), transport = Genie.WebThreads) |> handlers
 
 function handlers(model)
     on(model.process) do _
@@ -105,6 +107,8 @@ function ui(model)
 end
 
 
-
+function render()
+    html(ui(model), context = ctx = @__MODULE__)
+end
 
 end #module

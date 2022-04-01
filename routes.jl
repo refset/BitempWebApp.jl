@@ -35,10 +35,8 @@ route("/jsonpayload", method = POST) do
   end
 end
 
-model = handlers(Stipple.init(Model; transport = Genie.WebThreads))
-
 route("/reactive") do
-  html(ui(model), context = ctx = @__MODULE__)
+  StippleController.render()
 end
 
 route("/sub", method = POST) do
