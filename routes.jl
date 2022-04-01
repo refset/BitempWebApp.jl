@@ -38,16 +38,14 @@ end
 initModel()
 
 route("/reactive") do
-  StippleController.render()
+  StippleController.render("initial")
 end
 
 route("/sub", method = POST) do
-  age = params(:age, "99")
-  name = params(:name, "Schnipperdey")
-  println("PARAMS " * name * "  " * string(age))
-  model.name = ["a", "b", "Schnipperdey"]
+  StippleController.process("sub")
   redirect("/reactive")
 end
 
 
 Genie.up()
+Genie.config.log_requests = false

@@ -1,7 +1,8 @@
 module StippleController
 
-using Genie.Renderer.Html, Genie.Renderer, Stipple, StippleUI
-export Model, initModel, render
+using InsuranceContractsController
+using Genie.Renderer.Html, Genie.Renderer, SearchLight, Stipple, StippleUI
+export Model, initModel, process, render
 
 @reactive mutable struct Model <: ReactiveModel
     process::R{Bool} = false
@@ -107,11 +108,21 @@ end
 
 
 function initModel() 
+    SearchLight.Configuration.load() |> SearchLight.connect
+    csect=csection(4,4)
     global model = Stipple.init(Model, transport = Genie.WebThreads) |> handlers
+    model.name = [ csect.contract_revision.description ]
 end
 
-function render()
+function render(cmd::String)
     html(ui(model), context = ctx = @__MODULE__)
 end
 
+function process(cmd::String)
+    age = params(:age, "99")
+    name = params(:name, "Schnipperdey")
+    println("PARAMS " * name * "  " * string(age))
+    model.name = ["a", "b", "Schnipperdey"]
 end 
+
+end
