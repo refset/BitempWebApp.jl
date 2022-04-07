@@ -73,7 +73,20 @@ function ui(model)
                 "Input "
                 input("", @bind(:input), @on("keyup.enter", "process = true"))
             ])
-            p(" {{todo}} {{index}}", class="warning", @recur(:"(todo,index) in name"))
+            p(
+                "{{todo}} name[{{index}}]",
+                class = "warning",
+                @recur(:"(todo,index) in name")
+            )
+            p("""
+            <template v-for="(todo,index) in name">
+            <li>{{ todo }}</li>
+            <li class="divider" role="presentation"></li>
+            <li>{{name[index]}}</li>
+            <input  placeholder='todo' v-model='todo' v-on:keyup.enter='process = true' />
+            <input  placeholder='name[index]' v-model='name[index]' v-on:keyup.enter='process = true' />
+            </template>
+            """)
             StippleUI.form(
                 action = "/sub",
                 method = "POST",
@@ -121,4 +134,5 @@ end
 
 
 isrunning(:webserver) || up()
-end #module
+Genie.config.log_requests = false
+end #
