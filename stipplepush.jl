@@ -4,6 +4,7 @@ using Genie.Renderer.Html, Genie.Renderer, Stipple, StippleUI
 
 @reactive mutable struct Model <: ReactiveModel
     process::R{Bool} = false
+    expanded::R{Bool} = true
     output::R{String} = ""
     input::R{String} = ""
     name::R{Vector{String}} = ["fliegner", "Burmeister"]
@@ -73,6 +74,21 @@ function ui(model)
                 "Input "
                 input("", @bind(:input), @on("keyup.enter", "process = true"))
             ])
+            expansionitem(
+                        @bind(:expanded),
+                        expandseparator = true,
+                        icon = "signal_wifi_off",
+                        label = "Wifi settings",
+                        [
+                            card([
+                                cardsection(
+                                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                        eveniet doloribus ullam aliquid.",
+                                ),
+                            ]),
+                        ],
+                    )
             StippleUI.form(
                 action = "/sub",
                 method = "POST",
