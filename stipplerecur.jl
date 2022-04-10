@@ -64,56 +64,59 @@ function ui(model)
     end
     println("pinputs")
     println(pinputs)
-    page(
-        model,
-        class = "container",
-        [
-            pinputs
-            p([
-                "Input "
-                input("", @bind(:input), @on("keyup.enter", "process = true"))
-            ])
-            p(
-                "{{todo}} name[{{index}}]",
-                class = "warning",
-                @recur(:"(todo,index) in name")
-            )
-            p("""
-            <template v-for="(todo,index) in name">
-            <li>{{ todo }}</li>
-            <li class="divider" role="presentation"></li>
-            <li>{{name[index]}}</li>
-            <input  placeholder='todo' v-model='todo' v-on:keyup.enter='process = true' />
-            <input  placeholder='name[index]' v-model='name[index]' v-on:keyup.enter='process = true' />
-            </template>
-            """)
-            StippleUI.form(
-                action = "/sub",
-                method = "POST",
-                [
-                    textfield(
-                        "What's your name *",
-                        Symbol("name[0]"),
-                        name = "name",
-                        @iif(:warin),
-                        :filled,
-                        hint = "Name and surname",
-                        "lazy-rules",
-                        rules = "[val => val && val.length > 0 || 'Please type something']",
-                    ),
-                    numberfield(
-                        "Your age *",
-                        :age,
-                        name = "age",
-                        "filled",
-                        :lazy__rules,
-                        rules = "[val => val !== null && val !== '' || 'Please type your age',
-                          val => val > 0 && val < 100 || 'Please type a real age']",
-                    ),
-                    btn("submit", type = "submit", color = "primary"),
-                ],
-            )
-        ],
+    layout(
+        page(
+            model,
+            class = "container",
+            [
+                pinputs
+                p(
+                    [
+                        "Input "
+                        input("", @bind(:input), @on("keyup.enter", "process = true"))
+                    ],
+                )
+                template(
+                    [
+                        h1(["Hello, ", span("", @text(:todo))])
+                        p(
+                            input(
+                                "wommasehen",
+                                @bind(:todo),
+                                @on("keyup.enter", "process = true")
+                            ),
+                        )
+                    ],
+                    @recur(:"(todo,index) in name")
+                )
+                StippleUI.form(
+                    action = "/sub",
+                    method = "POST",
+                    [
+                        textfield(
+                            "What's your name *",
+                            Symbol("name[0]"),
+                            name = "name",
+                            @iif(:warin),
+                            :filled,
+                            hint = "Name and surname",
+                            "lazy-rules",
+                            rules = "[val => val && val.length > 0 || 'Please type something']",
+                        ),
+                        numberfield(
+                            "Your age *",
+                            :age,
+                            name = "age",
+                            "filled",
+                            :lazy__rules,
+                            rules = "[val => val !== null && val !== '' || 'Please type your age',
+                              val => val > 0 && val < 100 || 'Please type a real age']",
+                        ),
+                        btn("submit", type = "submit", color = "primary"),
+                    ],
+                )
+            ],
+        ),
     )
 end
 
@@ -134,5 +137,5 @@ end
 
 
 isrunning(:webserver) || up()
-Genie.config.log_requests = false
+# Genie.config.log_requests = false
 end #

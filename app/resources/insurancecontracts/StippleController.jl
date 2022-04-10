@@ -107,9 +107,9 @@ function ui(model)
 end
 
 
-function initModel() 
+function initModel(hid,vid) 
     SearchLight.Configuration.load() |> SearchLight.connect
-    csect=csection(4,4)
+    csect=csection(hid,vid)
     global model = Stipple.init(Model, transport = Genie.WebThreads) |> handlers
     model.name = [ csect.contract_revision.description ]
 end
