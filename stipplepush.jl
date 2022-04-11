@@ -4,7 +4,7 @@ using Genie.Renderer.Html, Genie.Renderer, Stipple, StippleUI
 
 @reactive mutable struct Model <: ReactiveModel
     process::R{Bool} = false
-    expanded::R{Bool} = true
+    expanded::R{Vector{Bool}} = [true, false]
     output::R{String} = ""
     input::R{String} = ""
     name::R{Vector{String}} = ["fliegner", "Burmeister"]
@@ -70,25 +70,50 @@ function ui(model)
         class = "container",
         [
             pinputs
-            p([
-                "Input "
-                input("", @bind(:input), @on("keyup.enter", "process = true"))
-            ])
-            expansionitem(
-                        @bind(:expanded),
-                        expandseparator = true,
-                        icon = "signal_wifi_off",
-                        label = "Wifi settings",
-                        [
-                            card([
-                                cardsection(
-                                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                        eveniet doloribus ullam aliquid.",
-                                ),
-                            ]),
-                        ],
-                    )
+            ul(
+                expansionitem(
+                    expandseparator = true,
+                    icon = "signal_wifi_off",
+                    label = "Wifi settings",
+                    [
+                        template(
+                            p(
+                                [
+                                    "Name {{index}} = {{name[index]}}"
+                                    input(
+                                        "",
+                                        @bind(Symbol("name[index]")),
+                                        @on("keyup.enter", "process = true")
+                                    ) 
+                                    "Given {{index}} = {{given[index]}}"
+                                    input(
+                                        "",
+                                        @bind(Symbol("given[index]")),
+                                        @on("keyup.enter", "process = true")
+                                    )
+                                ],
+                            ),
+                            @recur(:"(todo,index) in name")
+                        ),
+                        ul(
+                            expansionitem(
+                                expandseparator = true,
+                                icon = "signal_wifi_on",
+                                label = "Wifi settings",
+                                [
+                                    card([
+                                        cardsection(
+                                            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                                eveniet doloribus ullam aliquid.",
+                                        ),
+                                    ]),
+                                ],
+                            ),
+                        ),
+                    ],
+                ),
+            )
             StippleUI.form(
                 action = "/sub",
                 method = "POST",
